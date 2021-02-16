@@ -1,26 +1,23 @@
 import React from 'react';
-import s from './Profile.module.css';
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {MyPosts} from "./MyPosts/MyPosts";
-import {ProfilePageType, updateNewPostText} from "../../redux/state";
+import App from "../../App";
+import b from './Profile.module.css';
+import MyPosts from './MyPosts/MyPosts';
+import ProfileItem from "./ProfileItem/ProfileItem";
 
-type ProfileCompPageType = {
-    profilePage: ProfilePageType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+type ProfileProps = {
+    postData: Array<PostDataType>
+}
+type PostDataType = {
+  message: string
+     like: number
 }
 
-const Profile: React.FC<ProfileCompPageType> = (props) => {
-    return (
-        <div>
-            <ProfileInfo/>
-            <MyPosts posts={props.profilePage.posts}
-                     newPostText={props.profilePage.newPostText}
-                     addPost={props.addPost}
-                    updateNewPostText={updateNewPostText}
-                />
-        </div>
+const Profile = (props:ProfileProps) =>{
+    return(
+<div className={b.body}>
+  <ProfileItem/>
+  <MyPosts  postData={props.postData}/>
+</div>
     )
 }
-
 export default Profile;

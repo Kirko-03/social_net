@@ -1,0 +1,12 @@
+.body img{
+    width: 850px;
+    height: 300px;
+
+  }
+  .body{
+    grid-area:b;
+    background-image:url('https://i.pinimg.com/originals/bb/a4/09/bba409b760211c0a8851986f4820d67e.jpg');
+  }
+  .item{
+    color:red;
+  }

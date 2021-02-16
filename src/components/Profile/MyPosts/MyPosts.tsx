@@ -1,41 +1,28 @@
 import React from 'react';
-import s from './MyPosts.module.css';
-import Post from './Post/Post';
-import {PostType} from "../../../redux/state";
+import b from './MyPost.module.css';
+import Post from './Post/Post'
 
 
-type MyPostsType = {
-    posts: Array<PostType>
-    addPost: () => void
-    newPostText: string
-    updateNewPostText: (newText: string) => void
+type ArrayProfile = {
+    message: string
+    like: number
 }
 
+type MyPostProps = {
+    postData:Array<ArrayProfile>
+}
 
-export const MyPosts: React.FC<MyPostsType> = (props) => {
-    let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
-
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
-    const addPost = () => {
-            props.addPost()
-    }
-    const onPostChange = () => {
-        if(newPostElement.current) {
-            props.updateNewPostText(newPostElement.current.value)
-        }
-    }
-
-    return (
-        <div className={s.postsBlok}>
-            <h3>My posts</h3>
-            <div>
-                <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}>AddPost </textarea>
-                <button onClick={addPost}>Add post</button>
-            </div>
-            <div className={s.posts}>
-                {postsElement}
-            </div>
-        </div>
+const MyPost = (props:MyPostProps) =>{
+let PostElem=props.postData.map(p=> <Post message={p.message} like={p.like}/>)
+    return(
+        <div className={b.postsBlock}>
+ <div className={b.item}>
+   <a>My post</a> 
+    </div>
+    <textarea></textarea>
+  <button>add post</button>
+            {PostElem}
+</div>
     )
 }
-
+export default MyPost;

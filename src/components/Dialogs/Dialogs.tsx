@@ -1,36 +1,34 @@
 import React from 'react'
 import s from './Dialogs.module.css'
-import {DialogItems} from "./DialogItems/DialogItems";
-import {Messages} from "./Message/Messages";
-import {DialogsType, MessageType} from "../../redux/state";
+import {DialogItem} from "./DialogItem/DialogItem";
+import {Message} from "./Message/Message";
 
 type DialogsPropsType = {
-    dialogs: Array<DialogsType>
-    messages: Array<MessageType>
+    dialogData:Array<dialogDataType>
+    messageData:Array<messageDataType>
+}
+type dialogDataType={
+    name:string
+    id:number
+}
+type messageDataType={
+    message:string
 }
 
-const Dialogs: React.FC<DialogsPropsType> = (props) => {
-
-    let dialogsElement= props.dialogs.map(d=><DialogItems name={d.name} id={d.id}/>)
-    let messagesElement = props.messages.map(m=><Messages message={m.message}/> )
-
-    const newPostElement = React.createRef<HTMLTextAreaElement>()
-    const addMess = () => {
-        alert(newPostElement.current?.value)
-    }
-
+const Dialogs = (props: DialogsPropsType) => {
+    let DialogElement = props.dialogData.map(d=><DialogItem name={d.name} id={d.id}/>)
+    let MessageElement= props.messageData.map(m=><Message message={m.message}/>)
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {dialogsElement}
+                {DialogElement}
             </div>
-            <div className={s.messages}>
-                {messagesElement}
-                <textarea ref={newPostElement}>Add messages</textarea>
-                <button onClick={addMess}>Add mes</button>
+            <div className={s.message}>
+                {MessageElement}
             </div>
         </div>
     )
 }
 
-export default Dialogs
+
+export default Dialogs;

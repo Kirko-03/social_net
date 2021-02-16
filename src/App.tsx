@@ -1,43 +1,54 @@
 import React from 'react';
 import './App.css';
 import Header from './components/Header/Header';
+import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 import Dialogs from "./components/Dialogs/Dialogs";
-import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from "react-router-dom"
-import {Music} from "./components/Music/Music";
-import {News} from "./components/News/News";
-import {Settings} from "./components/Settings/Settings";
-import {RootStateType} from "./redux/state";
+import News from "./components/News/News"
+import Music from "./components/Music/Music";
+import Settings from "./components/Settings/Settings";
+import {Route, BrowserRouter} from "react-router-dom";
 
-type AppType = {
-    state: RootStateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+type AppPropsType = {
+    dialogData:Array<dialogDataType>
+    messageData:Array<messageDataType>
+    postData:Array<postDataType>
+}
+type dialogDataType={
+    name:string
+    id:number
+}
+type messageDataType={
+    message:string
+}
+type postDataType={
+    message:string
+    like:number
 }
 
-const App: React.FC<AppType> = (props) => {
+
+const App = (props:AppPropsType ) => {
+
+    debugger
     return (
         <BrowserRouter>
-            <div className='app-wrapper'>
+            <div className="app-writter">
                 <Header/>
                 <Navbar/>
-                <div className='app-wrapper-content'>
-                    <h1>Warning</h1>
-                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                                  messages={props.state.dialogsPage.messages}/>}/>
-                    <Route path='/profile' render={() => <Profile
-                         profilePage={props.state.profilePage}
-                         addPost={props.addPost}
-                         updateNewPostText={props.updateNewPostText}
-                    />}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/settings' component={Settings}/>
+                <div className="app-writter-body">
+                    <Route path='/dialogs' render={ () => <Dialogs dialogData={props.dialogData} messageData={props.messageData}/> }/>
+                    <Route path='/profile' render={() => <Profile postData={props.postData}/>}/>
+                    <Route path='/news' render={() => <News/>}/>
+                    <Route path='/music' render={() => <Music/>}/>
+                    <Route path='/settings' render={() => <Settings/>}/>
+
                 </div>
+
+
             </div>
         </BrowserRouter>
-    );
+    )
 }
+
 
 export default App;

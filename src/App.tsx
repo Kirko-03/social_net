@@ -9,6 +9,8 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route, BrowserRouter} from "react-router-dom";
 
+
+
 type AppPropsType = {
     dialogData:Array<dialogDataType>
     messageData:Array<messageDataType>
@@ -21,15 +23,12 @@ type dialogDataType={
 type messageDataType={
     message:string
 }
-type postDataType={
-    message:string
-    like:number
+type postDataType= {
+        message: string
+        like: number
 }
 
-
-const App = (props:AppPropsType ) => {
-
-    debugger
+const App = (props:AppPropsType) => {
     return (
         <BrowserRouter>
             <div className="app-writter">

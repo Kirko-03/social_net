@@ -1,5 +1,4 @@
 import React from 'react';
-import App from "../../App";
 import b from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileItem from "./ProfileItem/ProfileItem";

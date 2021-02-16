@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 
+
 let dialogData = [
     {name: "Kirik", id: 1},
     {name: "Dimik", id: 2},
@@ -23,9 +24,10 @@ let postData = [{ message:"Hi",like:1},
     {message:"LOSEEER",like:187},
     {message:"Соси пинчер",like:100}]
 
+
 ReactDOM.render(
     <BrowserRouter>
-        <App dialogData={dialogData} messageData={messageData} postData={postData}/>
+        <App messageData={messageData} dialogData={dialogData} postData={postData} />
     </BrowserRouter>,
     document.getElementById('root')
 );

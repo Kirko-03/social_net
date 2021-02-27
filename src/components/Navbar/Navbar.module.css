@@ -14,3 +14,14 @@ color:rgb(26, 16, 173);
   .item a.activeLink{
       color:white;
   }
+  .friends{
+      font-size: 30px;
+  }
+  .image {
+      margin: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50px;
+      border: solid green 1px ;
+      background:chartreuse;
+  }

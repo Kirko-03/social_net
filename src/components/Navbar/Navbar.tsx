@@ -16,10 +16,24 @@ const Navbar = () =>{
         <div className={c.item}>
      <NavLink to="/music" activeClassName={c.activeLink}>Music</NavLink>
         </div>
-        <br></br>
         <div className={c.item}>
      <NavLink to="/settings" activeClassName={c.activeLink}>Settings</NavLink>
         </div>
+            <br></br>
+            <br></br>
+            <div className={c.item}>
+                <NavLink to="/friends" activeClassName={c.activeLink} className={c.friends}>Friends</NavLink>
+            </div>
+
+            <img className={c.image}></img>
+<div>Kirik</div>
+            <img className={c.image}></img>
+            <div>Dimik</div>
+            <img className={c.image}></img>
+            <div>Blachek</div>
+
+
+
         </nav>
     )
 }

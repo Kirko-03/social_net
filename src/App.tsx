@@ -8,46 +8,35 @@ import News from "./components/News/News"
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {Route, BrowserRouter} from "react-router-dom";
+import {StoreType, RootStateType, ActionTypes} from "./redux/state";
+import Friends from "./components/Friends/Friends";
 
 
 
-type AppPropsType = {
-    dialogData:Array<dialogDataType>
-    messageData:Array<messageDataType>
-    postData:Array<postDataType>
-}
-type dialogDataType={
-    name:string
-    id:number
-}
-type messageDataType={
-    message:string
-}
-type postDataType= {
-        message: string
-        like: number
+type appPropsType = {
+    state:RootStateType
+    dispatch:(action:ActionTypes)=>void
 }
 
-const App = (props:AppPropsType) => {
+const App = (props:appPropsType) => {
     return (
         <BrowserRouter>
             <div className="app-writter">
                 <Header/>
                 <Navbar/>
                 <div className="app-writter-body">
-                    <Route path='/dialogs' render={ () => <Dialogs dialogData={props.dialogData} messageData={props.messageData}/> }/>
-                    <Route path='/profile' render={() => <Profile postData={props.postData}/>}/>
+                    <Route path='/dialogs' render={ () => <Dialogs dialogData={props.state.dialogsPage.dialogs} messageData={props.state.dialogsPage.messages}/> }/>
+                    <Route path='/profile' render={() => <Profile dispatch={props.dispatch} postData={props.state.profilePage.posts} NewTextPost={props.state.profilePage.NewTextPost}  />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/friends' render={() => <Friends/>}/>
 
                 </div>
 
 
             </div>
         </BrowserRouter>
-    )
+    );
 }
-
-
 export default App;

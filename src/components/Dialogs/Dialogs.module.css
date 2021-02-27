@@ -4,6 +4,7 @@
     height:300px;
 }
 .dialogs{
+    text-align: right;
     padding: 5px;
     grid-area:b;
     display:grid;

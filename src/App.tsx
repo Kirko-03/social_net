@@ -25,7 +25,7 @@ const App = (props:appPropsType) => {
                 <Header/>
                 <Navbar/>
                 <div className="app-writter-body">
-                    <Route path='/dialogs' render={ () => <Dialogs dialogData={props.state.dialogsPage.dialogs} messageData={props.state.dialogsPage.messages}/> }/>
+                    <Route path='/dialogs' render={ () => <Dialogs dispatch={props.dispatch} NewTextMessage={props.state.dialogsPage.NewTextMessage} dialogData={props.state.dialogsPage.dialogs} messageData={props.state.dialogsPage.messages}/> }/>
                     <Route path='/profile' render={() => <Profile dispatch={props.dispatch} postData={props.state.profilePage.posts} NewTextPost={props.state.profilePage.NewTextPost}  />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>

@@ -1,3 +1,6 @@
+import dialogReducer, {addMessageAC, updateMessageAC} from "./dialogReducer";
+import profileReducer, {addPostAC, updateAddPostAC} from "./profileReducer";
+
 export type RootStateType={
     profilePage:profilePageType
         dialogsPage:dialogsPageType
@@ -6,6 +9,7 @@ export type RootStateType={
 export type dialogsPageType={
         dialogs:Array<dialogsType>
         messages:Array<messagesType>
+    NewTextMessage:string
     }
 export type profilePageType={
     posts:Array<PostType>
@@ -27,33 +31,28 @@ export type PostType= {
     like: number
 
 }
+export type MessageType={
+    message:string
+}
 export type StoreType = {
     _state:RootStateType
     addPost:(postText:string) => void
-    subscribe: (observer: (state: RootStateType) => void)=>void
+    addMessage:(messageText:string)=>void
+    subscribe: (observer: () => void)=>void
     _onChange:()=>void
     updateAddPost:(t:string)=>void
+     updateMessage:(newMessage:string)=>void
     getState:()=>RootStateType
     dispatch:(action:ActionTypes)=>void
 }
-export type ActionTypes = ReturnType<typeof addPostAC>|ReturnType<typeof updateAddPostAC>
+export type ActionTypes = ReturnType<typeof addPostAC>|
+    ReturnType<typeof updateAddPostAC>|
+    ReturnType<typeof updateMessageAC>|
+    ReturnType<typeof addMessageAC>
 
-const ADDPOST = "ADD-POST";
-const UPDATEADDPOST = "UPDATE-ADD-POST";
+const UPDATEMESSAGE = "UPDATE-MESSAGE";
+const ADDMESSAGE = "ADDMESSAGE"
 
-export const addPostAC= (postText:string) => {
-    return {
-        type: ADDPOST,
-        postText: postText
-    }as const
-}
-export const updateAddPostAC = (newText:string) => {
-       return{
-           type:UPDATEADDPOST,
-           newText:newText
-       }as const
-
-}
 export type friendsType = {
     friend:string
 }
@@ -76,23 +75,24 @@ export let store:StoreType = {
         this._state.profilePage.NewTextPost = newText
         this._onChange()
     },
+    updateMessage(newMessage:string){
+      this._state.dialogsPage.NewTextMessage = newMessage
+        this._onChange()
+    },
+    addMessage(messageText:string){
+        const  newMessage:MessageType = {
+            message:messageText
+        }
+        this._state.dialogsPage.messages.push(newMessage);
+        this._onChange()
+    },
     subscribe(observer){
-        // @ts-ignore
         this._onChange = observer
     },
     dispatch(action){
-        if(action.type === ADDPOST){
-            const  newPost:PostType = {
-                message:action.postText,
-                like:0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._onChange()
-        }else if(action.type === UPDATEADDPOST){
-            this._state.profilePage.NewTextPost = action.newText
-            this._onChange()
-
-        }
+        this._state.profilePage =  profileReducer(this._state.profilePage,action)
+        this._state.dialogsPage =  dialogReducer(this._state.dialogsPage,action)
+        this._onChange()
     },
     _state:{
         dialogsPage: {
@@ -107,7 +107,8 @@ export let store:StoreType = {
                 {message: "hello"},
                 {message: "Как дела придурок?)"},
                 {message: "Игноришь?"}
-            ]
+            ],
+            NewTextMessage:"kokpo"
         },
         profilePage: {
             posts: [{message: "Hi", like: 1},

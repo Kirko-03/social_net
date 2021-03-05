@@ -1,11 +1,16 @@
-import { ChangeEvent } from "react";
-import {ActionTypes, PostType, profilePageType} from "./state";
 
+import {ActionTypes, PostType, profilePageType} from "./store";
 
+let initialState = {posts: [{message: "Hi", like: 1},
+    {message: "Whats up?", like: 1},
+    {message: "Learn Pituhon(((", like: -13},
+    {message: "LOSEEER", like: 187},
+    {message: "Соси пинчер", like: 100}],
+    NewTextPost: "it-camasutra"}
 
 const ADDPOST = "ADD-POST";
 const UPDATEADDPOST = "UPDATE-ADD-POST";
-const profileReducer = (store:profilePageType,action:ActionTypes)=> {
+const profileReducer = (store:profilePageType=initialState,action:ActionTypes)=> {
 
     switch(action.type) {
         case ADDPOST:
@@ -30,10 +35,10 @@ export const addPostAC= (postText:string) => {
         postText: postText
     }as const
 }
-export const updateAddPostAC = (e:ChangeEvent<HTMLTextAreaElement>) => {
+export const updateAddPostAC = (body:string) => {
     return{
         type:UPDATEADDPOST,
-        newText:e.currentTarget.value
+        newText:body
     }as const
 
 }

@@ -1,28 +1,22 @@
 import React from 'react';
 import b from './Profile.module.css';
-import MyPosts from './MyPosts/MyPost';
+
 import ProfileItem from "./ProfileItem/ProfileItem";
-import {ActionTypes, PostType} from "../../redux/state";
+import { ReduxStoreType } from '../../redux/redux-store';
+import MyPostContainer from "./MyPosts/MyPostContainer";
 
 type ProfileProps = {
-    postData: Array<PostDataType>
-    NewTextPost:string
-    dispatch:(action:ActionTypes)=>void
+  store:ReduxStoreType
 
 }
-type PostDataType = {
-  message: string
-     like: number
-}
 
-const Profile = (props:ProfileProps) =>{
-    return(
-<div className={b.body}>
-  <ProfileItem/>
-  <MyPosts  postData={props.postData}
-            dispatch={props.dispatch}
-            NewTextPost={props.NewTextPost}/>
-</div>
+const Profile = (props: ProfileProps) => {
+
+    return (
+        <div className={b.body}>
+            <ProfileItem/>
+            <MyPostContainer store={props.store}/>
+        </div>
     )
 }
 export default Profile;

@@ -2,34 +2,29 @@ import React from 'react';
 import b from './MyPost.module.css';
 import Post from './Post/Post'
 import { addPostAC, updateAddPostAC} from "../../../redux/profileReducer";
-import { ActionTypes } from '../../../redux/state';
+import {ActionTypes, profilePageType} from '../../../redux/store';
 import { ChangeEvent } from 'react';
-
-
-
-
-type ArrayProfile = {
-    message: string
-    like: number
-}
+import {ReduxStoreType} from "../../../redux/redux-store";
 
 type MyPostProps = {
-    postData:Array<ArrayProfile>
-    NewTextPost:string
-    dispatch:(action:ActionTypes)=>void
+    state:profilePageType
+    addPosts:()=>void
+    newTextChangeHandler:(body:string)=>void
 
 }
 const MyPost = (props:MyPostProps) =>{
-
+    let state = props.state
 
 const addPosts = () =>{
-        props.dispatch(addPostAC(props.NewTextPost))
+        props.addPosts()
 }
+let NewTextPost = props.state.NewTextPost
 
-let PostElem=props.postData.map(p=> <Post message={p.message} like={p.like}/>)
+let PostElem=state.posts.map(p=> <Post message={p.message} like={p.like}/>)
 
     const newTextChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
-      props.dispatch(updateAddPostAC(e))
+        let body = e.target.value
+      props.newTextChangeHandler(body)
 
     }
     return(
@@ -37,7 +32,7 @@ let PostElem=props.postData.map(p=> <Post message={p.message} like={p.like}/>)
  <div className={b.item}>
    <a>My post</a>
     </div>
-    <textarea  value={props.NewTextPost} onChange={newTextChangeHandler}/>
+    <textarea placeholder={"Введите что-нибудь"}  value={NewTextPost} onChange={newTextChangeHandler}/>
   <button onClick={addPosts}  >add post</button>
             {PostElem}
 </div>

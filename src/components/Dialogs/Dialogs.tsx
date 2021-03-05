@@ -1,36 +1,29 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import s from './Dialogs.module.css'
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
-import { addMessageAC, updateMessageAC} from "../../redux/dialogReducer";
-import {ActionTypes} from "../../redux/state";
-import { ChangeEvent } from 'react';
+import {ReduxStoreType} from "../../redux/redux-store";
 
 
 type DialogsPropsType = {
-    dialogData:Array<dialogDataType>
-    messageData:Array<messageDataType>
-    dispatch:(action:ActionTypes)=>void
-    NewTextMessage:string
-}
-type dialogDataType={
-    name:string
-    id:number
-}
-type messageDataType={
-    message:string
+
+    addMessage: () => void
+    store: ReduxStoreType
+    newTextChangeHandler: (body: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-    let DialogElement = props.dialogData.map(d=><DialogItem name={d.name} id={d.id}/>)
-    let MessageElement= props.messageData.map(m=><Message message={m.message}/>)
+    let state = props.store.getState().dialogPage
+    let DialogElement = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let MessageElement = state.messages.map(m => <Message message={m.message}/>)
+    let NewTextMessage = state.NewTextMessage
     let addMessage = () => {
-        props.dispatch(addMessageAC(props.NewTextMessage))
+        props.addMessage()
 
     }
-    const newTextChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
-props.dispatch(updateMessageAC(body))
+        props.newTextChangeHandler(body)
     }
 
     return (
@@ -40,7 +33,8 @@ props.dispatch(updateMessageAC(body))
             </div>
             <div className={s.message}>
                 {MessageElement}
-                <textarea  value={props.NewTextMessage} onChange={newTextChangeHandler}></textarea>
+                <textarea placeholder={"Введите что-нибудь"} value={NewTextMessage}
+                          onChange={newTextChangeHandler}></textarea>
                 <button onClick={addMessage}>new post</button>
             </div>
         </div>

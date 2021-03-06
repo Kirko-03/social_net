@@ -13,23 +13,19 @@ import {ReduxStoreType, RootReduxState} from "./redux/redux-store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
-type appPropsType = {
-    store: ReduxStoreType
-    dispatch: (action: ActionTypes) => void
-    state: RootReduxState
-}
 
-const App = (props: appPropsType) => {
+
+const App = () => {
     return (
         <BrowserRouter>
             <div className="app-writter">
                 <Header/>
                 <Navbar/>
                 <div className="app-writter-body">
-                    <Route path='/dialogs' render={() => <DialogsContainer  store={props.store}/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer />}/>
 
                     <Route path='/profile'
-                           render={() => <Profile store={props.store}/>}/>
+                           render={() => <Profile />}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

@@ -7,20 +7,20 @@ import { ChangeEvent } from 'react';
 import {ReduxStoreType} from "../../../redux/redux-store";
 
 type MyPostProps = {
-    state:profilePageType
+    profilePage:profilePageType
     addPosts:()=>void
     newTextChangeHandler:(body:string)=>void
 
 }
 const MyPost = (props:MyPostProps) =>{
-    let state = props.state
+    let profilePage = props.profilePage
 
 const addPosts = () =>{
         props.addPosts()
 }
-let NewTextPost = props.state.NewTextPost
+let NewTextPost =profilePage.NewTextPost
 
-let PostElem=state.posts.map(p=> <Post message={p.message} like={p.like}/>)
+let PostElem=profilePage.posts.map(p=> <Post message={p.message} like={p.like}/>)
 
     const newTextChangeHandler = (e:ChangeEvent<HTMLTextAreaElement>) =>{
         let body = e.target.value

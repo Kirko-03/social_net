@@ -16,19 +16,24 @@ let initialState =  {dialogs: [
     ],
     NewTextMessage:"kokpo"}
 
-const dialogReducer = (store:dialogsPageType=initialState,action:ActionTypes) => {
+const dialogReducer = (state:dialogsPageType=initialState,action:ActionTypes) => {
 switch(action.type){
-    case UPDATEMESSAGE:
-        store.NewTextMessage = action.body
+    case UPDATEMESSAGE: {
+        let copyStore = {...state, NewTextMessage: action.body}
+        copyStore.NewTextMessage = action.body
 
-        return store
-    case ADDMESSAGE:
-        let body = store.NewTextMessage
-        store.NewTextMessage = ""
-        store.messages.push({id:6,message:body})
-     return store
+        return copyStore
+    }
+    case ADDMESSAGE: {
+        let body = state.NewTextMessage
+        return {
+            ...state,
+            messages: [...state.messages, {id: 6, message: body}],
+            NewTextMessage: ""
+        }
+    }
     default:
-        return store
+        return state
     }
 
 }

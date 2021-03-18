@@ -1,5 +1,6 @@
 import dialogReducer, {addMessageAC, updateMessageAC} from "./dialogReducer";
 import profileReducer, {addPostAC, updateAddPostAC} from "./profileReducer";
+import {followAC, setUsersAC, unfollowAC} from "./usersReducer";
 
 export type RootStateType = {
     profilePage: profilePageType
@@ -11,6 +12,7 @@ export type dialogsPageType = {
     messages: Array<messagesType>
     NewTextMessage: string
 }
+
 export type profilePageType = {
     posts: Array<PostType>
     NewTextPost: string
@@ -50,7 +52,9 @@ export type StoreType = {
 export type ActionTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof updateAddPostAC> |
     ReturnType<typeof updateMessageAC> |
-    ReturnType<typeof addMessageAC>
+    ReturnType<typeof addMessageAC>|ReturnType<typeof followAC> |
+ReturnType<typeof unfollowAC> |
+ReturnType<typeof setUsersAC>
 
 const UPDATEMESSAGE = "UPDATE-MESSAGE";
 const ADDMESSAGE = "ADDMESSAGE"

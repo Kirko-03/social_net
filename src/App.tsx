@@ -7,15 +7,15 @@ import News from "./components/News/News"
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import {BrowserRouter, Route} from "react-router-dom";
-import {ActionTypes} from "./redux/store";
 import Friends from "./components/Friends/Friends";
-import {ReduxStoreType, RootReduxState} from "./redux/redux-store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {UsersContainer} from "./redux/UsersContainer";
 
 
 
 
 const App = () => {
+
     return (
         <BrowserRouter>
             <div className="app-writter">
@@ -23,9 +23,9 @@ const App = () => {
                 <Navbar/>
                 <div className="app-writter-body">
                     <Route path='/dialogs' render={() => <DialogsContainer />}/>
-
                     <Route path='/profile'
                            render={() => <Profile />}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
                     <Route path='/settings' render={() => <Settings/>}/>

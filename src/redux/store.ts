@@ -1,6 +1,6 @@
 import dialogReducer, {addMessageAC, updateMessageAC} from "./dialogReducer";
 import profileReducer, {addPostAC, updateAddPostAC} from "./profileReducer";
-import {followAC, setUsersAC, unfollowAC} from "./usersReducer";
+import {followAC, setCurrentPageAC, setTotalUserCountAC, setUsersAC, unfollowAC} from "./usersReducer";
 
 export type RootStateType = {
     profilePage: profilePageType
@@ -27,7 +27,7 @@ export type dialogsType = {
 }
 export type messagesType = {
     message: string
-    id:number
+    id: number
 }
 export type PostType = {
     message: string
@@ -52,12 +52,10 @@ export type StoreType = {
 export type ActionTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof updateAddPostAC> |
     ReturnType<typeof updateMessageAC> |
-    ReturnType<typeof addMessageAC>|ReturnType<typeof followAC> |
-ReturnType<typeof unfollowAC> |
-ReturnType<typeof setUsersAC>
+    ReturnType<typeof addMessageAC> | ReturnType<typeof followAC> |
+    ReturnType<typeof unfollowAC> |
+    ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUserCountAC>
 
-const UPDATEMESSAGE = "UPDATE-MESSAGE";
-const ADDMESSAGE = "ADDMESSAGE"
 
 export type friendsType = {
     friend: string
@@ -107,9 +105,9 @@ export let store: StoreType = {
                 {name: "sasha", id: 5}
             ],
             messages: [
-                {id:1,message: "hello"},
-                {id:2,message: "Как дела придурок?)"},
-                {id:3,message: "Игноришь?"}
+                {id: 1, message: "hello"},
+                {id: 2, message: "Как дела придурок?)"},
+                {id: 3, message: "Игноришь?"}
             ],
             NewTextMessage: "kokpo"
         },

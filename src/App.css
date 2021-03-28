@@ -1,18 +1,18 @@
 .app-writter {
   margin: 0 auto;
+  font-family: "Times New Roman" ;
   display: grid;
   width: 1200px;
   grid-template-areas:
   "h h"
   "n c"
   ;
-
   grid-template-rows: 100px 1fr;
   grid-template-columns: 2fr 10fr;
-  /* grid-gap: 10px; */
+   grid-gap: 5px;
 }
 .app-writter-body{
-  background-image:url('https://i.pinimg.com/originals/bb/a4/09/bba409b760211c0a8851986f4820d67e.jpg');
+  background: linear-gradient(270deg, rgba(0,97,211,1) 10%, rgba(0,255,239,1) 100%);
   width: 1000px;
   min-height:575px;
 }

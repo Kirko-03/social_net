@@ -1,6 +1,6 @@
 import dialogReducer, {addMessageAC, updateMessageAC} from "./dialogReducer";
 import profileReducer, {addPostAC, updateAddPostAC} from "./profileReducer";
-import {followAC, setCurrentPageAC, setTotalUserCountAC, setUsersAC, unfollowAC} from "./usersReducer";
+import {follow, setCurrentPage, setLoadItem, setTotalUserCount, setUsers, unfollow} from "./usersReducer";
 
 export type RootStateType = {
     profilePage: profilePageType
@@ -52,9 +52,12 @@ export type StoreType = {
 export type ActionTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof updateAddPostAC> |
     ReturnType<typeof updateMessageAC> |
-    ReturnType<typeof addMessageAC> | ReturnType<typeof followAC> |
-    ReturnType<typeof unfollowAC> |
-    ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> | ReturnType<typeof setTotalUserCountAC>
+    ReturnType<typeof addMessageAC> | ReturnType<typeof follow> |
+    ReturnType<typeof unfollow> |
+    ReturnType<typeof setUsers> |
+    ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUserCount> |
+    ReturnType<typeof setLoadItem>
 
 
 export type friendsType = {

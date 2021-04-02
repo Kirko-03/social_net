@@ -1,5 +1,5 @@
 import dialogReducer, {addMessageAC, updateMessageAC} from "./dialogReducer";
-import profileReducer, {addPostAC, updateAddPostAC} from "./profileReducer";
+import profileReducer, {addPostAC, setUserProfile, updateAddPostAC, UserProfileType} from "./profileReducer";
 import {follow, setCurrentPage, setLoadItem, setTotalUserCount, setUsers, unfollow} from "./usersReducer";
 
 export type RootStateType = {
@@ -16,7 +16,7 @@ export type dialogsPageType = {
 export type profilePageType = {
     posts: Array<PostType>
     NewTextPost: string
-
+    userProfile:UserProfileType|null
 }
 export type friendsPageType = {
     friends: Array<friendsType>
@@ -57,7 +57,7 @@ export type ActionTypes = ReturnType<typeof addPostAC> |
     ReturnType<typeof setUsers> |
     ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUserCount> |
-    ReturnType<typeof setLoadItem>
+    ReturnType<typeof setLoadItem>|ReturnType<typeof setUserProfile>
 
 
 export type friendsType = {
@@ -120,7 +120,8 @@ export let store: StoreType = {
                 {message: "Learn Pituhon(((", like: -13},
                 {message: "LOSEEER", like: 187},
                 {message: "Соси пинчер", like: 100}],
-            NewTextPost: "it-camasutra"
+            NewTextPost: "it-camasutra",
+            userProfile:null
         },
         friendsPage: {
             friends: [{friend: "Dimas"},

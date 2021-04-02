@@ -1,16 +1,41 @@
 import {ActionTypes, PostType, profilePageType} from "./store";
 
+export type UserProfileType={
+    aboutMe: string,
+    contacts:ContactsType,
+    lookingForAJob:boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large:string
+}
+}
+  export type ContactsType = {
+        facebook:string,
+        website: string,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: string,
+        github: string,
+        mainLink: string
+    }
+
 let initialState = {
     posts: [{message: "Hi", like: 1},
         {message: "Whats up?", like: 1},
         {message: "Learn Pituhon(((", like: -13},
         {message: "LOSEEER", like: 187},
         {message: "Соси пинчер", like: 100}],
-    NewTextPost: "it-camasutra"
+    NewTextPost: "it-camasutra",
+    userProfile:null
 }
 
 const ADDPOST = "ADD-POST";
 const UPDATEADDPOST = "UPDATE-ADD-POST";
+const SETUSERPROFILE = "SET-USER-PROFILE"
 const profileReducer = (state: profilePageType = initialState, action: ActionTypes) => {
 
     switch (action.type) {
@@ -31,6 +56,13 @@ const profileReducer = (state: profilePageType = initialState, action: ActionTyp
                 NewTextPost: action.newText
             }
         }
+        case SETUSERPROFILE:{
+            return {
+                ...state,
+                userProfile:action.userProfile
+            }
+        }
+
         default :
             return state
     }
@@ -47,5 +79,11 @@ export const updateAddPostAC = (body: string) => {
         newText: body
     } as const
 
+}
+export const setUserProfile = (userProfile:UserProfileType|null) =>{
+    return{
+        type:SETUSERPROFILE,
+        userProfile: userProfile
+    }as const
 }
 export default profileReducer

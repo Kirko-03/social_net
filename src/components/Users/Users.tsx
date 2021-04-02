@@ -2,6 +2,7 @@ import React from "react";
 import us from "./users.module.css"
 import userPhoto from "./../images.jpg"
 import {InitialStateType} from "../../redux/usersReducer";
+import { NavLink } from "react-router-dom";
 
 type UsersFuncType = {
     follow: (userId: number) => void
@@ -34,7 +35,9 @@ let Users = (props: UsersFuncType) => {
 
                 <div className={us.page}>
 <span>
+    <NavLink to={"/profile/"}>
                     <img src={u.photos.small != null ? u.photos.small : userPhoto}/>
+             </NavLink>
                     <div className={us.inform}>
                         <div>Имя:{u.name}</div>
                         <div>Город:{"u.location.cityName"}</div>

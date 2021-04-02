@@ -10,6 +10,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import Friends from "./components/Friends/Friends";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {UsersContainer} from "./redux/UsersContainer";
+import {ProfileContainer} from "./components/Profile/ProfileContainer";
 
 
 
@@ -24,7 +25,7 @@ const App = () => {
                 <div className="app-writter-body">
                     <Route path='/dialogs' render={() => <DialogsContainer />}/>
                     <Route path='/profile'
-                           render={() => <Profile />}/>
+                           render={() => <ProfileContainer />}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
